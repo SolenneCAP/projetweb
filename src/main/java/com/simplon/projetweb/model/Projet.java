@@ -3,11 +3,12 @@ package com.simplon.projetweb.model;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Data
 public class Projet {
 
-    private Long id;
+    private Long idProjet;
 
 
     private String nomProjet;
@@ -20,4 +21,9 @@ public class Projet {
 
 
     private String creePar;
+
+
+    private Date closLe;
+
+
 }

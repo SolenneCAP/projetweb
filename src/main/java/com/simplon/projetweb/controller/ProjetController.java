@@ -45,7 +45,7 @@ public class ProjetController {
 
     @PostMapping("/saveProjet")
     public ModelAndView saveProjet(@ModelAttribute Projet projet) {
-        if (projet.getId() != null) {
+        if (projet.getIdProjet() != null) {
             // Si l'ID du projet n'est pas nul, cela signifie qu'il s'agit d'une mise à jour d'un projet existant
 
             // Utiliser la méthode updateProjet de ProjetService pour mettre à jour le projet

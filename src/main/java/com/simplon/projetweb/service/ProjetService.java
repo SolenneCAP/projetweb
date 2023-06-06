@@ -12,7 +12,7 @@ public class ProjetService {
     @Autowired
     private ProjetProxy projetProxy;
 
-    public Projet getProjet(final int idProjet) {
+    public Projet getProjet(final long idProjet) {
         return projetProxy.getProjet(idProjet);
     }
 
@@ -20,7 +20,7 @@ public class ProjetService {
         return projetProxy.getProjets();
     }
 
-    public void deleteProjet(final int idProjet) {
+    public void deleteProjet(final long idProjet) {
         projetProxy.deleteProjet(idProjet);
     }
 
@@ -28,7 +28,7 @@ public class ProjetService {
         // Règle de gestion pour mettre le nom du projet en majuscules
         projet.setNomProjet(projet.getNomProjet().toUpperCase());
 
-        if (projet.getId() == null) {
+        if (projet.getIdProjet() == null) {
             // si l'id est nul, alors c'est un nouveau projet
             return projetProxy.createProjet(projet);
         } else {
@@ -37,15 +37,10 @@ public class ProjetService {
     }
 
     public Projet updateProjet(Projet projet) {
-        // Implémentez la logique pour mettre à jour le projet
-        // Vous pouvez utiliser le projetProxy pour effectuer la mise à jour
-        return projetProxy.updateProjet(projet);
+            return null;
     }
 
     public Projet createProjet(Projet projet) {
-        // Implémentez la logique pour créer un nouveau projet
-        // Vous pouvez utiliser le projetProxy pour effectuer la création
-        return projetProxy.createProjet(projet);
+            return null;
     }
 }
-
