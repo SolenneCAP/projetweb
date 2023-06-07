@@ -1,10 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Nouveau Projet</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Ajoute les liens vers les fichiers CSS de Bootstrap 5.3.0 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <!-- Ajoute le lien vers le fichier CSS personnalisé -->
+    <link rel="stylesheet" href="../static/style.css" th:href="@{/style.css}"/>
+    <title>Formulaire d'ajout d'un nouveau Projet</title>
 </head>
 <body>
+<div id="FormNouvProjet" th:fragment="new-projet (newProjet)">
+
+<h2>Partagez votre projet !</h2>
+
+    <form th:action="@{saveProjet}" method="post" th:object="${projet}">
+        <label>Nom du projet:</label>
+        <label>
+            <input type="text" th:field="*{nomProjet}" required/>
+        </label><br/>
+
+        <label>Description:</label>
+        <label>
+            <textarea th:field="*{descriptionProjet}" required></textarea>
+        </label><br/>
+
+
+        <label>Date de clôture:</label>
+        <label>
+            <input type="text" th:field="*{closLe}" required/>
+        </label><br/>
+
+        <label>Créé par:</label>
+        <label>
+            <input type="text" th:field="*{creePar}" required/>
+        </label><br/>
+
+        <button type="submit">Partager mon projet</button>
+    </form>
+
+<button>Retour à la liste des projets</button>
+
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 
 </body>
 </html>

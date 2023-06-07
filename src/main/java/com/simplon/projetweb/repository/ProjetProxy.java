@@ -1,24 +1,24 @@
 package com.simplon.projetweb.repository;
 
-import com.simplon.projetweb.service.ProjetService;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.ResponseEntity;
 import com.simplon.projetweb.CustomProperties;
 import com.simplon.projetweb.model.Projet;
+import com.simplon.projetweb.service.ProjetService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
-import java.lang.module.ModuleDescriptor;
+import java.util.Arrays;
 
 @Slf4j
 @Component
 public class ProjetProxy {
-    @Autowired
-    private CustomProperties props;
+
+    private CustomProperties props = new CustomProperties();
     private ProjetService projetService;
 
     /**
@@ -28,18 +28,18 @@ public class ProjetProxy {
      */
     public Iterable<Projet> getProjets() {
         String baseApiUrl = props.getApiUrl();
-        String getProjetsUrl = baseApiUrl + "/index";
+        String getProjetsUrl = baseApiUrl + "/projets";
 
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<Iterable<Projet>> response = restTemplate.exchange(
+        ResponseEntity<Projet[]> response = restTemplate.exchange(
                 getProjetsUrl,
                 HttpMethod.GET,
                 null,
-                new ParameterizedTypeReference<Iterable<Projet>>() {
+                new ParameterizedTypeReference<Projet[]>() {
                 }
         );
         log.debug("Get projets call " + response.getStatusCode().toString());
-        return response.getBody();
+        return Arrays.asList(response.getBody());
     }
 
     /**

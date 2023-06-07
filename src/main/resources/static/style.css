@@ -1,0 +1,26 @@
+*{
+    margin: 0;
+    padding: 2px;
+    front-family: Roboto, sans-serif;
+    box-sizing: content-box;
+}
+
+html{
+    background-image: url(../resources/static/ProjetEtudiant.jpg);
+    overflow-y: scroll;
+    padding: 20px;
+    opacity: 50;
+    height:100%;
+}
+#Header{
+    margin: 30px 30px 30px 330px;
+    display: flex;
+}
+h1{
+    front-family: Roboto,sans-serif;
+    front-size: 3em;
+    front-weight: bold;
+    front-variant: normal;
+    text-align: center;
+}
+

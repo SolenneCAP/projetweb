@@ -16,7 +16,7 @@ public class ProjetController {
     @Autowired
     private ProjetService projetService;
 
-    @GetMapping("/")
+    @GetMapping({"/", "/index", "/index.html"})
     public String index(Model model) {
         Iterable<Projet> listProjet = projetService.getProjets();
         model.addAttribute("projets", listProjet);
@@ -31,7 +31,7 @@ public class ProjetController {
     }
 
     @GetMapping("/updateProjet/{idProjet}")
-    public String updateProjet(@PathVariable("idProjet") final int idProjet, Model model) {
+    public String updateProjet(@PathVariable("idProjet") final Long idProjet, Model model) {
         Projet projet = projetService.getProjet(idProjet);
         model.addAttribute("projet", projet);
         return "formNouveauProjet";
