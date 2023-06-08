@@ -25,22 +25,18 @@ public class ProjetService {
     }
 
     public Projet saveProjet(Projet projet) {
+        Projet result;
         // Règle de gestion pour mettre le nom du projet en majuscules
         projet.setNomProjet(projet.getNomProjet().toUpperCase());
 
         if (projet.getIdProjet() == null) {
             // si l'id est nul, alors c'est un nouveau projet
-            return projetProxy.createProjet(projet);
+            result = projetProxy.createProjet(projet);
         } else {
-            return projetProxy.updateProjet(projet);
+            result = projetProxy.updateProjet(projet);
         }
+        return result;
     }
 
-    public Projet updateProjet(Projet projet) {
-            return null;
-    }
 
-    public Projet createProjet(Projet projet) {
-            return null;
-    }
 }
