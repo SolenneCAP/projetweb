@@ -21,13 +21,6 @@ public class ProjetController {
     private ProjetProxy projetProxy;
 
 
-    @GetMapping({"/", "/index", "/index.html"})
-    public String index(Model model) {
-        Iterable<Projet> listProjet = projetService.getProjets();
-        model.addAttribute("projets", listProjet);
-        return "index";
-    }
-
     @GetMapping({"/createProjet", "/nxprojet", "/nxprojet.html"})
     public String createProjet(Model model) {
         Projet e = new Projet();

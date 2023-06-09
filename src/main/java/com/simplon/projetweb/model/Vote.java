@@ -1,20 +1,28 @@
 package com.simplon.projetweb.model;
 
-import jakarta.persistence.*;
 import lombok.Data;
 
-@Entity
+import java.time.LocalDateTime;
+
+
 @Data
+
 public class Vote {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long idVote;
 
-    @ManyToOne
-    @JoinColumn(name = "idProjet")
+
     private Projet projet;
 
-    public void setProjet(Projet projet) {
+    private Boolean valueVote;
 
+
+    private LocalDateTime voteLe;
+
+    private String user;
+    private String idProjet;
+
+    public String getIdProjet() {
+        return idProjet;
     }
 }

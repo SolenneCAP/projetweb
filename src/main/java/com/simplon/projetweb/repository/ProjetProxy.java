@@ -19,6 +19,7 @@ import java.util.Optional;
 
 @Slf4j
 @Component
+
 public class ProjetProxy {
 
     private final CustomProperties props = new CustomProperties();
@@ -54,7 +55,7 @@ public class ProjetProxy {
 
     public Projet getProjet(long idProjet) {
         String baseApiUrl = props.getApiUrl();
-        String getProjetUrl = baseApiUrl + "/projet" + idProjet;
+        String getProjetUrl = baseApiUrl + "/projet/" + idProjet;
 
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<Projet> response = restTemplate.exchange(
@@ -64,7 +65,7 @@ public class ProjetProxy {
                 Projet.class
         );
 
-        log.debug("Get Projet call" + response.getStatusCode());
+        log.debug("Get Projet call " + response.getStatusCode());
         return response.getBody();
     }
 
@@ -80,14 +81,14 @@ public class ProjetProxy {
         String createProjetUrl = baseApiUrl + "/projet";
 
         RestTemplate restTemplate = new RestTemplate();
-        HttpEntity<Projet> request = new HttpEntity<Projet>(e);
+        HttpEntity<Projet> request = new HttpEntity<>(e);
         ResponseEntity<Projet> response = restTemplate.exchange(
                 createProjetUrl,
                 HttpMethod.POST,
                 request,
                 Projet.class);
 
-        log.debug("Create Projet call" + response.getStatusCode());
+        log.debug("Create Projet call " + response.getStatusCode());
 
         return response.getBody();
     }
@@ -103,7 +104,7 @@ public class ProjetProxy {
         String updateProjetUrl = baseApiUrl + "/projet/" + e.getIdProjet();
 
         RestTemplate restTemplate = new RestTemplate();
-        HttpEntity<Projet> request = new HttpEntity<Projet>(e);
+        HttpEntity<Projet> request = new HttpEntity<>(e);
         ResponseEntity<Projet> response = restTemplate.exchange(
                 updateProjetUrl,
                 HttpMethod.PUT,
@@ -117,7 +118,6 @@ public class ProjetProxy {
     /**
      * Supprimer un projet en utilisant la méthode d'échange de RestTemplate
      * au lieu de supprimer la méthode afin de consigner le code d'état de la réponse
-     *
      * @param e Le projet à supprimer
      **/
 
@@ -136,7 +136,7 @@ public class ProjetProxy {
 
 
     public Optional<Projet> findByIdProjet(Long idProjet) {
-        return null;
+        return Optional.empty();
     }
 
     public Page<Projet> findAll(Pageable pageable) {

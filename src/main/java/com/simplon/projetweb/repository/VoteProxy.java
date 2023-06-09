@@ -1,51 +1,65 @@
 package com.simplon.projetweb.repository;
 
-import com.simplon.projetweb.model.Projet;
+import com.simplon.projetweb.CustomProperties;
 import com.simplon.projetweb.model.Vote;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.stereotype.Repository;
+import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
 
-import java.time.LocalDateTime;
-import java.util.List;
 
-@Entity
-@Repository
+@Slf4j
+@Component
+@Data
+
 public class VoteProxy {
-    private Long idVote;
-    private Long idProjet;
-    private Boolean value;
-    private LocalDateTime voteLe;
-    private String user;
-    @Id
-    private Long id;
+    private CustomProperties props = new CustomProperties();
 
-    public VoteProxy() {
-    }
+    private RestTemplate restTemplate;
 
-    public VoteProxy(Long idVote, Long idProjet, Boolean value, LocalDateTime voteLe, String user) {
-        this.idVote = idVote;
-        this.idProjet = idProjet;
-        this.value = value;
-        this.voteLe = voteLe;
-        this.user = user;
-    }
 
-    @Query("SELECT v FROM Vote v WHERE v.projet = :projet AND v.user = :user")
-    public List<Vote> findByProjetAndUser(Projet projet, String user) {
-        return null;
-    }
-
-    public void save(Vote vote) {
+    @Autowired
+    public VoteProxy(CustomProperties props,
+                     RestTemplate restTemplate) {
+        this.props = props;
+        this.restTemplate = restTemplate;
 
     }
 
-    public void setIdVote(Long idVote) {
-        this.idVote = idVote;
+    public void saveVote(Vote vote) {
+        String baseApiUrl = props.getApiUrl();
+        String saveVoteUrl = baseApiUrl + "/vote";
+
+        HttpEntity<Vote> request = new HttpEntity<>(vote);
+        ResponseEntity<Vote> response = restTemplate.exchange(
+                saveVoteUrl,
+                HttpMethod.POST,
+                request,
+                Vote.class);
+
+        log.debug("Save Vote call: " + response.getStatusCode());
+
+        response.getBody();
     }
 
-    public Long getIVoted() {
-        return idVote;
+    public Vote findByProjetAndUser(String idProjet, String user) {
+        String baseApiUrl = props.getApiUrl();
+        String findByProjetAndUserUrl = baseApiUrl + "/vote?projetId=" + idProjet + "&user=" + user;
+
+        ResponseEntity<Vote> response = restTemplate.exchange(
+                findByProjetAndUserUrl,
+                HttpMethod.GET,
+                null,
+                Vote.class);
+
+        log.debug("Find Vote call: " + response.getStatusCode());
+
+        return response.getBody();
     }
+
+
 }

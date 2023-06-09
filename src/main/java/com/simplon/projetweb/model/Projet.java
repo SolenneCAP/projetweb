@@ -1,52 +1,30 @@
 package com.simplon.projetweb.model;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.Future;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import lombok.Data;
-import org.hibernate.annotations.Cascade;
-import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Collection;
 
-@Entity
+
 @Data
 public class Projet {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idProjet")
+
     private Long idProjet;
 
-    @Column(name = "nomProjet")
-    @Size(min = 5, max = 120)
     private String nomProjet;
 
-    @Column(name = "descriptionProjet")
+
     private String descriptionProjet;
 
-    //@Column(name = "creeLe")
-    @Column(nullable = false, updatable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    @CreatedDate
+
     private LocalDateTime creeLe;
 
-    @Future
-    // @Column(nullable = false)
-    @Column(name = "closLe")
+
     private LocalDateTime closLe;
 
-    @NotNull
-    @NotBlank
-    @Column(name = "creePar")
     private String creePar;
 
-    @OneToMany(mappedBy = "projet")
-    @OrderBy("voteLe DESC")
-    @Cascade(org.hibernate.annotations.CascadeType.DELETE)
     private Collection<Vote> votes;
 
 

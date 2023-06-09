@@ -71,4 +71,6 @@ public class VoteController {
         voteService.deleteVote(voteIdVote);
         return "redirect:/votes/" + projetId;
     }
+
+
 }
