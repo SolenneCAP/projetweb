@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<div class="box-projet" th:fragment="single-projet (projet)">
+    <div class="box-projet" th:fragment="single-projet (projet)">
+        <img th:class="${projet.closLe< #temporals.createNow()} ? 'clos' : 'ouvert'"
+             th:src="@{${projet.closLe< #temporals.createNow()} ? '/clos.png' : '/ouvert.png'}">
+    </div>
+
+    <div class="projet-text-content">
+        <div class="projet-desc">
+            <a th:href="@{votes/{idVote}(idVote=${projet.idProjet})}" th:if="${projet.closLe< #temporals.createNow()}"
+               th:text="${projet.descriptionProjet}"
+               tooltip="Voir le détail des votes">Projet</a>
+            <span th:if="${projet.colsLe > #temporals.createNow()}" th:text="${projet.descriptionProjet}">Projet</span>
+        </div>
+
+        <div class="projet-votes" th:if="${projet.closLe <= #temporals.createNow()}">
+            <span class="vote" th:classappend="${projet.countTrue() > projet.countFalse() ? 'vote-pour' : ''}"
+                  th:text="'Pour : '+${projet.countTrue()}">Pour : 200</span>
+            <span class="vote" th:classappend="${projet.countTrue() < projet.countFalse() ? 'vote-contre' : ''}"
+                  th:text="'Contre : '+${projet.countFalse()}">Contre : 156</span>
+        </div>
+
+        <div class="projet-votes" th:if="${projet.closLet > #temporals.createNow()}">
+            <form method="post" th:action="@{/votes/{id}(id=${projet.idProjet})}">
+                <div>Votez !</div>
+                <input name="user" placeholder="Votre nom" required type="text">
+                <button class="vote vote-pour" name="value" th:text="Pour" type="submit" value="true">Pour</button>
+                <button class="vote vote-contre" name="value" th:text="Contre" type="submit" value="false">Contre
+                </button>
+            </form>
+        </div>
+        <div class="projet-dates">
+            Créé par <span th:text="${projet.creePar}">Jean Projecteur</span>
+            le <span th:text="${#temporals.format(projet.creeLe, 'dd/MM/yyyy à HH:mm:ss')}">10/06/2023</span>,
+            fermeture des votes prévue le <span
+                th:text="${#temporals.format(projet.closLe, 'dd/MM/yyyy à HH:mm:ss')}">11/07/2023</span>
+        </div>
+        <div>
+            <div class="projet-titre" th:text="${sondage.titreSondage}"></div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

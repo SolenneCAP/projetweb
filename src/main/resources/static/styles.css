@@ -143,11 +143,11 @@ img.open, img.closed {
 }
 
 .vote-pour {
-    background-color: #618751;
+    background-color: #ace097;
 }
 
 .vote-contre {
-    background-color: indianred;
+    background-color: #ef9090;
 }
 
 #votes * {

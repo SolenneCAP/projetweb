@@ -1,47 +1,48 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Votes des projets</title>
-    <link href="../static/styles.css" rel="stylesheet" th:href="@{/styles.css}"/>
-    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <title>Votes</title>
+  <link href="../static/styles.css" rel="stylesheet" th:href="@{/styles.css}"/>
+  <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
 </head>
-<header th:replace="~{fragmentheader :: header}">
-    <h1>Votez pour vos projets préférés</h1>
+<header th:replace="~{fragment-header :: header}">
+  <h1>Votez pour vos projets préférés !</h1>
 </header>
 <body>
 <div class="title-bar">
-    <button th:onclick="|window.location='@{/}'|" title="Retour">&lt</button>&nbsp;
-    <h1>Détail des votes</h1>
+  <button th:onclick="|window.location='@{/}'|" title="Retour">&lt</button>&nbsp;
+  <h1>Détail des votes</h1>
 </div>
-<div class="sondage-sumup">
-    <th:block th:insert="~{fragmentprojet :: single-projet (projet=${projet})}"></th:block>
-    <div id="votes">
-        <div th:if="${votes.isEmpty()}">
-            Aucun vote pour ce projet :(
-        </div>
-        <div class="error" th:if="${alreadyVoted != null}" th:text="${alreadyVoted}">
-            Erreur : Vous avez déjà voté
-        </div>
-        <table th:if="${!votes.isEmpty()}">
-            <thead>
-            <tr>
-                <th>Date</th>
-                <th>Etudiant</th>
-                <th>Vote</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:class="${alreadyVote == null ? 'last-vote' : ''}" th:each="vote : ${votes}" th:object="${vote}">
-                <td th:text="${#temporals.format(vote.voteLe, 'dd/MM/yyyy à HH:mm:ss')}">Quand</td>
-                <td th:text="${vote.user}">Qui</td>
-                <td th:classappend="${vote.value ? 'vote-pour' : 'vote-contre'}"
-                    th:text="${vote.value ? 'Pour':'Contre'}">Quoi
-                </td>
-            </tr>
-            </tbody>
-        </table>
+<div class="projet-sumup">
+  <th:block th:insert="~{fragment-projet :: single-projet (projet=${projet})}"></th:block>
+  <div id="votes">
+    <div th:if="${votes.isEmpty()}"> Aucun vote pour ce projet
     </div>
+
+    <div class="error" th:if="${alreadyVote != null}" th:text="${alreadyVote}">Vote impossible : vous avez déjà voté
+      pour ce projet !
+    </div>
+
+    <table th:if="${!votes.isEmpty()}">
+      <thead>
+      <tr>
+        <th>Date</th>
+        <th>Etudiant</th>
+        <th>Vote</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:class="${alreadyVote == null ? 'last-vote' : ''}" th:each="vote : ${votes}" th:object="${vote}">
+        <td th:text="${#temporals.format(vote.voteLe, 'dd/MM/yyyy à HH:mm:ss')}">Quand</td>
+        <td th:text="${vote.user}">Qui</td>
+        <td th:classappend="${vote.value ? 'vote-pour' : 'vote-contre'}"
+            th:text="${vote.value ? 'Pour':'Contre'}">Quoi
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
 </body>
 </html>

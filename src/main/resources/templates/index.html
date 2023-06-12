@@ -1,61 +1,27 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html" lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Ajoute les liens vers les fichiers CSS de Bootstrap 5.3.0 -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    <!-- Ajoute le lien vers le fichier CSS personnalisé -->
-    <link rel="stylesheet" href="../static/style.css" th:href="@{/style.css}"/>
-    <title>Projet web application</title>
+    <title>Les projets des étudiants</title>
+    <link href="../static/styles.css" rel="stylesheet" th:href="@{/styles.css}"/>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
 </head>
-
-<header th:replace="~{fragementheader :: header}">
+<header th:replace="~{fragment-header :: header}">
     <h1>Les projets des étudiants du campus</h1>
 </header>
 <body>
-
 <div id="header">
     <button class="btn btn-ok" id="btn-refresh-pollings">Rafraîchir</button>&nbsp;
-    <th:block th:replace="~{fragmentpagination :: pagination(page=${page},pageCount=${pageCount})}"></th:block>
+    <th:block th:replace="~{fragment-pagination :: pagination(page=${page},pageCount=${pageCount})}"></th:block>
 </div>
 
-<div th:replace="~{fragmen-form :: new-projet (newProjet=${newProjet})}"></div>
-
-<div id="Projets" th:fragment="all-projets">
-    <th:block th:each="projet : ${projets}">
-        <div th:replace="~{fragmentprojet :: single-projet(projet=${projet})}"></div>
+<div th:replace="~{fragment-form :: new-projet (newProjet=${newProjet})}"></div>
+<div id="projets" th:fragment="all-projets">
+    <th:block th:each="projet: ${projet}">
+        <div th:replace="~{fragment-projet :: single-projet (projet=${projet})}"></div>
     </th:block>
 </div>
 
 <script src="../static/projets.js" th:src="@{/projets.js}" type="module"></script>
 </body>
 </html>
-
-
-<!--
-<table>
-    <thead>
-    <tr>
-        <th>Nom</th>
-        <th>Description</th>
-        <th>Date de création</th>
-    </tr>
-    </thead>
-    <tbody>
-    -->
-
-<!-- Boucle sur la liste des projets -->
-<!--  <tr th:each="projet : ${projets}">
-      <td th:text="${projet.nomProjet}"></td>
-      <td th:text="${projet.descriptionProjet}"></td>
-      <td th:text="${projet.creeLe}"></td>
-  </tr>
-  </tbody>
-</table>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
-
-</body>
-</html>
--->
