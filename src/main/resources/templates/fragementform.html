@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div id="form-new-projet" th:fragment="new-projet (newProjet)">
+    <h2>Partagez votre projet</h2>
+    <form action="#" id="form-creation-projet" method="post" th:object="${newProjet}">
+        <label for="nomProjet">Nom du projet :</label>
+        <input id="nomProjet" placeholder="Ex. : Plateforme de partage de projets étudiants" required th:field="*{nomProjet}"
+               type="text"><br>
+        <label for="question">Description du projet :</label>
+        <input id="question" placeholder="Ex. : Le projet consiste à créer une plateforme en ligne où les étudiants peuvent proposer leurs projets, les partager avec d'autres étudiants et les soumettre à un vote communautaire." required th:field="*{descriptionProjet}"
+               type="text"><br>
+        <label for="creePar">Votre nom :</label>
+        <input id="creePar" placeholder="Ex. : Jean Projection" required th:field="*{creePar}" type="text"><br>
+        <label for="closLe">Date de clôture des votes:</label>
+        <input id="closLe" required th:field="*{closLe}" type="datetime-local"><br>
+        <div class="btn-bar">
+            <button class="btn" id="btn-reset-polling" type="reset">Supprimer</button>
+            <button class="btn btn-ok" id="btn-create-polling" type="submit">Soumettre</button>&nbsp;
+        </div>
+    </form>
+</div>
+</body>
+</html>

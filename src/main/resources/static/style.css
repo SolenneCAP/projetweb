@@ -16,11 +16,260 @@ html{
     margin: 30px 30px 30px 330px;
     display: flex;
 }
-h1{
-    front-family: Roboto,sans-serif;
+
+h1 {
+    front-family: Roboto, sans-serif;
     front-size: 3em;
     front-weight: bold;
     front-variant: normal;
     text-align: center;
 }
 
+
+h2 {
+    padding-top: 20px;
+    text-align: center;
+}
+
+#header {
+    margin: 30px 30px 10px 330px;
+    display: flex;
+}
+
+.pagination {
+    display: inline-flex;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.pagination .nb-resultats-par-page {
+    flex-grow: 1;
+    text-align: right;
+}
+
+#form-new-projet {
+    position: fixed;
+    margin-top: -50px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    padding: 15px;
+    border: dashed 2px black;
+    box-shadow: 0px 0px 5px 0px whitesmoke;
+    background-color: rgba(1, 1, 1, 0.2);
+}
+
+#form-new-projet h2 {
+    padding-top: 0px;
+    margin-top: 0px;
+}
+
+#form-new-projet * {
+    margin-top: 10px;
+}
+
+#form-new-projet .btn-bar {
+    text-align: right;
+}
+
+#btn-create-polling {
+    font-weight: bold;
+}
+
+#projets {
+    margin-left: 330px;
+    margin-right: 50px;
+}
+
+.box-projet {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    background-color: #4d5065;
+    color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px 0px whitesmoke;
+    padding: 10px;
+    margin-bottom: 30px;
+}
+
+.projet-text-content {
+    width: 100%;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.projet-desc {
+    display: inline-block;
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+.sondage-votes {
+    float: right;
+}
+
+.sondage-votes form {
+    display: grid;
+}
+
+.sondage-question {
+    font-size: 2em;
+    text-wrap: avoid;
+}
+
+.sondage-dates {
+    display: block;
+    font-size: 0.8em;
+    font-style: italic;
+}
+
+img.open, img.closed {
+    width: 64px;
+    height: 64px;
+    float: left;
+    padding: 10px;
+}
+
+.vote {
+    display: inline-block;
+    color: white;
+    font-weight: bold;
+    font-size: 12pt;
+    border-radius: 3px;
+    padding: 3px;
+    margin: 4px;
+    border-color: white;
+    border-width: 1px;
+}
+
+.vote-pour {
+    background-color: #618751;
+}
+
+.vote-contre {
+    background-color: indianred;
+}
+
+#votes * {
+    text-align: center;
+}
+
+#votes table {
+    position: relative;
+    text-align: center;
+    padding: 50px;
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1.2em auto;
+}
+
+#votes table tbody tr.last-vote:first-child {
+    background-color: rgba(255, 255, 0, 0);
+    animation: fade-out 2s;
+}
+
+@keyframes fade-out {
+    0% {
+        background-color: rgb(88, 178, 236);
+    }
+    100% {
+        background-color: rgba(88, 178, 236, 0);
+    }
+}
+
+#votes table td {
+    padding: 15px;
+    border: solid 1px #fff;
+}
+
+.sondage-sumup {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+input {
+    box-sizing: border-box;
+    margin-bottom: 5px;
+    width: 100%;
+}
+
+a:link {
+    color: #1f2552;
+}
+
+a:hover {
+    color: white;
+}
+
+a:visited {
+    color: black;
+}
+
+a[tooltip] {
+    position: relative;
+}
+
+a[tooltip]:hover:after {
+    /* Le texte qui apparaîtra dans la bulle de description sera le contenu de l'attribut tooltip */
+    content: attr(tooltip);
+    position: absolute;
+    left: 0;
+    top: -100%;
+    white-space: nowrap;
+    z-index: 1;
+    padding: 10px;
+    background: linear-gradient(to bottom, #373b59, #000);
+    color: #fff;
+    font-size: 14px;
+    border-radius: 5px;
+    transition-delay: 1s;
+}
+
+a.page {
+    color: white;
+    font-size: 1.2em;
+    text-decoration: none;
+}
+
+a.page:hover {
+    text-decoration: underline;
+}
+
+.page-courante {
+    color: #58b2ec;
+    font-weight: bolder;
+    font-size: 1.5em;
+}
+
+button {
+    cursor: pointer;
+    padding: 4px 10px 4px 10px;
+    align-items: center;
+    font-size: 1.1em;
+    border-radius: 8px;
+    border-width: 1px;
+}
+
+button.btn {
+    background-color: gray;
+}
+
+button.btn-ok {
+    background-color: #58b2ec;
+}
+
+.title-bar {
+    display: flex;
+    margin-right: 10px;
+    margin-bottom: 20px;
+}
+
+.title-bar h1 {
+    margin-left: 20px;
+}
+
+.error {
+    color: red;
+    font-size: 1.5em;
+}

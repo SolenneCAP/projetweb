@@ -1,10 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<html xmlns:th="http://www.thymeleaf.org">
 
+<body>
+<div class="box-projet" th:fragment="single-projet(projet)">
+    <img th:class="${projet.closLe &lt; #temporals.createNow() ? 'ferme' : 'ouvert'}"
+         th:src="@{${projet.closLe &lt; #temporals.createNow()} ? '/Ferme.png' : '/Ouvert.png'}">
+
+    <div class="projet-text-content">
+        <div class="projet-desc">
+            <a th:href="@{/votes/{idVote}(idProjet=${projet.idProjet})}" th:if="${projet.closLe &lt;= #temporals.createNow()}"
+               th:text="${projet.descriptionProjet}"
+               tooltip="Voir le détail des votes">Projet</a>
+            <span th:if="${projet.closLe &gt; #temporals.createNow()}"
+                  th:text="${projet.descriptionProjet}">Projet</span>
+        </div>
+
+        <div class="projet-votes" th:if="${projet.closLe &lt;= #temporals.createNow()}">
+                <span class="vote" th:classappend="${projet.countTrue() &gt; projet.countFalse() ? 'vote-pour' : ''}"
+                      th:text="'Pour : ' + ${projet.countTrue()}">J'apprécie ce projet : 1029</span>
+            <span class="vote" th:classappend="${projet.countTrue() &lt; projet.countFalse() ? 'vote-contre' : ''}"
+                  th:text="'Contre : ' + ${projet.countFalse()}">J'apprécie moins ce projet : 455</span>
+        </div>
+
+        <div class="projet-votes" th:if="${projet.closLe &gt; #temporals.createNow()}">
+            <form method="post" th:action="@{/votes/{id}(id=${projet.idProjet})}">
+                <div>Votez !</div>
+                <input name="user" placeholder="Votre nom" required type="text">
+                <button class="vote vote-pour" name="value" th:text="J'apprécie ce projet" type="submit" value="true">
+                    J'apprécie ce projet
+                </button>
+                <button class="vote vote-contre" name="value" th:text="J'apprécie moins ce projet" type="submit"
+                        value="false">J'apprécie moins ce projet
+                </button>
+            </form>
+        </div>
+
+        <div class="projet-dates">
+            Créé par <span th:text="${projet.creePar}">Jean Projecteur</span> le <span
+                th:text="${#temporals.format(projet.creeLe, 'dd/MM/yyyy à HH:mm:ss')}">10/10/2023</span>,
+            fermeture le <span th:text="${#temporals.format(projet.closLe, 'dd/MM/yyyy à HH:mm:ss')}">11/10/2023</span>
+        </div>
+        <div>
+            <div class="projet-titre" th:text="${projet.nomProjet}"></div>
+        </div>
+    </div>
+</div>
 </body>
+
 </html>
