@@ -14,12 +14,9 @@ public class Projet {
 
     private String nomProjet;
 
-
     private String descriptionProjet;
 
-
     private LocalDateTime creeLe;
-
 
     private LocalDateTime closLe;
 
@@ -110,6 +107,4 @@ public class Projet {
     public void setVotes(Collection<Vote> pVotes) {
         votes = pVotes;
     }
-
-
 }

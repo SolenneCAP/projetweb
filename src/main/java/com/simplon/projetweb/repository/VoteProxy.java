@@ -11,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.List;
+
 
 @Slf4j
 @Component
@@ -61,5 +63,7 @@ public class VoteProxy {
         return response.getBody();
     }
 
-
+    public List<Vote> findByIdProjet(Long idProjet) {
+        return null;
+    }
 }

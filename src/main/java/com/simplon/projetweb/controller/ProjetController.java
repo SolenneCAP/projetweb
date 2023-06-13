@@ -1,57 +1,55 @@
 package com.simplon.projetweb.controller;
 
 import com.simplon.projetweb.model.Projet;
-import com.simplon.projetweb.repository.ProjetProxy;
 import com.simplon.projetweb.service.ProjetService;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.*;
 
+@Data
 @Controller
+@RequestMapping("/")
 public class ProjetController {
-    private ProjetProxy mRepository;
-    @Autowired
+
     private ProjetService projetService;
 
-    private ProjetProxy projetProxy;
+    @Autowired
+    public ProjetController(ProjetService projetService) {
+        this.projetService = projetService;
+    }
 
 
-    @GetMapping({"/createProjet", "/nxprojet", "/nxprojet.html"})
+    @GetMapping("/saveProjet")
     public String createProjet(Model model) {
         Projet e = new Projet();
         model.addAttribute("projet", e);
-        return "nxprojet";
+        return "index";
     }
 
-    @GetMapping({"/updateProjet/{idProjet}", "/majprojet{idProjet}", "/majprojet{idProjet}.html"})
-    public String updateProjet(@PathVariable("idProjet") final Long idProjet, Model model) {
-        Projet e = projetService.getProjet(idProjet);
-        model.addAttribute("projet", e);
-        return "majprojet";
+    @GetMapping("/updateProjet/{id}")
+    public String showUpdateProjetForm(@PathVariable("id") Long id, Model model) {
+        Projet projet = projetService.getProjet(id);
+        model.addAttribute("projet", projet);
+        return "index";
     }
 
-    @GetMapping("/deleteProjet/{idProjet}")
-    public ModelAndView deleteProjet(@PathVariable("idProjet") final Long idProjet) {
-        projetService.deleteProjet(idProjet);
-        return new ModelAndView("redirect:/");
+    @GetMapping("/delete/{id}")
+    public String deleteProjetById(@PathVariable("id") Long id) {
+        projetService.deleteProjet(id);
+        return "redirect:/";
     }
 
     @PostMapping("/saveProjet")
-    public String saveProjet(@ModelAttribute Projet projet) {
-        Projet result;
-
+    public String saveProjet(@ModelAttribute("projet") Projet projet) {
         // Règle de gestion pour mettre le nom du projet en majuscules
         projet.setNomProjet(projet.getNomProjet().toUpperCase());
 
-        result = projetService.saveProjet(projet);
+        projetService.saveProjet(projet);
 
         // Redirection vers la page d'accueil
-        return "redirect:/";
+        return ("redirect:/");
     }
 
 }

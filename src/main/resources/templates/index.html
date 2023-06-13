@@ -12,12 +12,11 @@
 <body>
 <div id="header">
     <button class="btn btn-ok" id="btn-refresh-pollings">Rafraîchir</button>&nbsp;
-    <th:block th:replace="~{fragment-pagination :: pagination(page=${page},pageCount=${pageCount})}"></th:block>
 </div>
 
-<div th:replace="~{fragment-form :: new-projet (newProjet=${newProjet})}"></div>
+<div th:replace="~{fragment-form :: nouveau-projet (nouveauProjet=${nouveauProjet})}"></div>
 <div id="projets" th:fragment="all-projets">
-    <th:block th:each="projet: ${projet}">
+    <th:block th:each="projet: ${projets}">
         <div th:replace="~{fragment-projet :: single-projet (projet=${projet})}"></div>
     </th:block>
 </div>

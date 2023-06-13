@@ -3,14 +3,16 @@ package com.simplon.projetweb.service;
 import com.simplon.projetweb.model.Projet;
 import com.simplon.projetweb.repository.ProjetProxy;
 import lombok.Data;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Data
 @Service
 public class ProjetService {
-    @Autowired
-    private ProjetProxy projetProxy;
+    private final ProjetProxy projetProxy;
+
+    public ProjetService(ProjetProxy projetProxy) {
+        this.projetProxy = projetProxy;
+    }
 
     public Projet getProjet(final long idProjet) {
         return projetProxy.getProjet(idProjet);
@@ -24,7 +26,7 @@ public class ProjetService {
         projetProxy.deleteProjet(idProjet);
     }
 
-    public Projet saveProjet(Projet projet) {
+    public void saveProjet(Projet projet) {
         Projet result;
         // Règle de gestion pour mettre le nom du projet en majuscules
         projet.setNomProjet(projet.getNomProjet().toUpperCase());
@@ -35,8 +37,5 @@ public class ProjetService {
         } else {
             result = projetProxy.updateProjet(projet);
         }
-        return result;
     }
-
-
 }

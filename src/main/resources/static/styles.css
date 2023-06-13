@@ -1,17 +1,18 @@
-*{
+* {
     margin: 0;
     padding: 2px;
-    front-family: Roboto, sans-serif;
+    font-family: Roboto, sans-serif;
     box-sizing: content-box;
 }
 
-html{
+html {
     background-image: url(../resources/static/ProjetEtudiant.jpg);
     overflow-y: scroll;
     padding: 20px;
-    opacity: 50;
-    height:100%;
+    opacity: 0.5;
+    height: 100%;
 }
+
 #Header{
     margin: 30px 30px 30px 330px;
     display: flex;

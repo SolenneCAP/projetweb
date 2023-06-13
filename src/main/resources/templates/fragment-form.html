@@ -2,13 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
 
-<div id="form-new-projet" th:fragment="new-projet (newProjet)">
+<div id="form-nouveau-projet" th:fragment="nouveau-projet (nouveauProjet)">
 
     <h2>Partagez votre projet !</h2>
 
-    <form action="#" id="form-creation-projet" method="post" th:object="$(newProjet)">
+    <form id="form-creation-projet" method="post" th:action="@{saveProjet}" th:object="${nouveauProjet}">
         <label for="nomProjet">Nom du projet : </label>
-        <input id="nomProjet" placeholder="Exemple : Application de partage des projets." required th:field="*{nomProjet}"
+        <input id="nomProjet" placeholder="Exemple : Application de partage des projets." required
+               th:field="*{nomProjet}"
                type="text">
         <br>
 
